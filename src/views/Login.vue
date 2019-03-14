@@ -48,7 +48,7 @@
                     password: this.ruleForm2.checkPass
                 }
                 this.listLoading = true;
-                this.$http.post('http://192.168.1.174:8088/sysManager/login', myData1, {emulateJSON: true}).then(result => {
+                this.$http.post('http://47.93.225.228:8080/sysManager/login', myData1, {emulateJSON: true}).then(result => {
                     this.logining = false;
                     if (result.body.code !== 200) {
                         this.$message({

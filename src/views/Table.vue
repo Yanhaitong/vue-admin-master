@@ -102,7 +102,7 @@
 				 	pageSize: 2
 				}
 				this.listLoading = true;
-				this.$http.post('http://192.168.1.174:8088/sysManager/getH5UserRegster', myData, {emulateJSON: true}).then(result => {
+				this.$http.post('http://47.93.225.228:8080/sysManager/getH5UserRegster', myData, {emulateJSON: true}).then(result => {
 					console.log(result)
 					this.total = result.body.data.total;
 					this.users = result.body.data.records;
