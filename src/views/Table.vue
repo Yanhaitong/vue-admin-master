@@ -95,13 +95,13 @@
 				};
 
 				let myData = {
-					startTime: JSON.stringify(this.filters.name[0]),
-					endTime: JSON.stringify(this.filters.name[1]),
-					pageNumm: 1,
+					startTime: this.formatDateTime(this.filters.name[0]),
+					endTime: this.formatDateTime(this.filters.name[1]),
+					pageNum: 1,
 				 	pageSize: 2
 				}
 				this.listLoading = true;
-				this.$http.post('http://47.93.225.228:8080/sysManager/getH5UserRegster', myData, {emulateJSON: true}).then(result => {
+				this.$http.post('http://localhost:8088/sysManager/getH5UserRegster', myData, {emulateJSON: true}).then(result => {
 					console.log(result)
 					this.total = result.body.data.total;
 					this.users = result.body.data.records;
@@ -113,7 +113,20 @@
 			},
 			pickerOptions2: function() {},
 			formatSex: function() {},
-		},
+			formatDateTime : function (date) {
+				if (date) {
+					var y = date.getFullYear();
+					var m = date.getMonth() + 1;
+					m = m < 10 ? ('0' + m) : m;
+					var d = date.getDate();
+					d = d < 10 ? ('0' + d) : d;
+					return y + '-' + m + '-' + d;
+				}else {
+					return null;
+				}
+			}
+
+	},
 		mounted() {
 			this.getUsers();
 		}
