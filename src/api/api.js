@@ -2,7 +2,7 @@ import axios from 'axios';
 
 let base = '';
 
-export const requestLogin = params => { return axios.post(`${base}/login`, params).then(res => res.data); };
+//export const requestLogin = params => { return axios.post(`${base}/login`, params).then(res => res.data); };
 
 // export const myPostRequest = params => { debugger; return axios.post('http://47.93.225.228:8080/sysManager/getAPPStatistics', params).then( res => {debugger} ); };
 

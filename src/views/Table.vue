@@ -27,7 +27,7 @@
 		<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;" stripe>
 			<el-table-column prop="date" label="日期" style="width: 50%;">
 			</el-table-column>
-			<el-table-column prop="count" label="数据" style="width: 50%;">
+			<el-table-column prop="count" label="注册数据" style="width: 50%;">
 			</el-table-column>
 		</el-table>
 
@@ -93,15 +93,16 @@
 					page: this.page,
 					name: this.filters.name
 				};
-
+				var user = sessionStorage.getItem('user');
 				let myData = {
 					startTime: this.formatDateTime(this.filters.name[0]),
 					endTime: this.formatDateTime(this.filters.name[1]),
+					clientName : JSON.parse(user).clientName,
 					pageNum: 1,
 				 	pageSize: 2
 				}
 				this.listLoading = true;
-				this.$http.post('http://localhost:8088/sysManager/getH5UserRegster', myData, {emulateJSON: true}).then(result => {
+				this.$http.post('http://192.168.1.174:8088/sysManager/getH5UserRegster', myData, {emulateJSON: true}).then(result => {
 					console.log(result)
 					this.total = result.body.data.total;
 					this.users = result.body.data.records;
