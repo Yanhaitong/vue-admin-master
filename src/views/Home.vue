@@ -68,7 +68,7 @@
 	export default {
 		data() {
 			return {
-				sysName:'VUEADMIN',
+				sysName:'哈哈哈有限公司',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '',

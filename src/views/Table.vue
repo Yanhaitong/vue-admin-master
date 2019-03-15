@@ -33,7 +33,7 @@
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
+			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
 
@@ -76,6 +76,7 @@
 				},
 				users: [],
 				total: 0,
+				pageSize: 20,
 				page: 1,
 				listLoading: false,
 				sels: [],//列表选中列
@@ -98,12 +99,11 @@
 					startTime: this.formatDateTime(this.filters.name[0]),
 					endTime: this.formatDateTime(this.filters.name[1]),
 					clientName : JSON.parse(user).clientName,
-					pageNum: 1,
-				 	pageSize: 2
+					pageNum: this.page,
+				 	pageSize: this.pageSize
 				}
 				this.listLoading = true;
 				this.$http.post('http://47.93.225.228:8080/sysManager/getH5UserRegster', myData, {emulateJSON: true}).then(result => {
-					console.log(result)
 					this.total = result.body.data.total;
 					this.users = result.body.data.records;
 					this.listLoading = false;
