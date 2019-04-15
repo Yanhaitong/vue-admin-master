@@ -27,13 +27,13 @@
 		<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;" stripe>
 			<el-table-column prop="date" label="日期" style="width: 50%;">
 			</el-table-column>
-			<el-table-column prop="count" label="注册数据" style="width: 50%;">
+			<el-table-column prop="count" label="数据" style="width: 50%;">
 			</el-table-column>
 		</el-table>
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="pageSize" :total="total" style="float:right;">
+			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
 
@@ -76,7 +76,6 @@
 				},
 				users: [],
 				total: 0,
-				pageSize: 20,
 				page: 1,
 				listLoading: false,
 				sels: [],//列表选中列
@@ -94,16 +93,16 @@
 					page: this.page,
 					name: this.filters.name
 				};
-				var user = sessionStorage.getItem('user');
+
 				let myData = {
-					startTime: this.formatDateTime(this.filters.name[0]),
-					endTime: this.formatDateTime(this.filters.name[1]),
-					clientName : JSON.parse(user).clientName,
-					pageNum: this.page,
-				 	pageSize: this.pageSize
+					startTime: JSON.stringify(this.filters.name[0]),
+					endTime: JSON.stringify(this.filters.name[1]),
+					pageNumm: 1,
+				 	pageSize: 2
 				}
 				this.listLoading = true;
 				this.$http.post('http://47.93.225.228:8080/sysManager/getH5UserRegster', myData, {emulateJSON: true}).then(result => {
+					console.log(result)
 					this.total = result.body.data.total;
 					this.users = result.body.data.records;
 					this.listLoading = false;
@@ -114,20 +113,7 @@
 			},
 			pickerOptions2: function() {},
 			formatSex: function() {},
-			formatDateTime : function (date) {
-				if (date) {
-					var y = date.getFullYear();
-					var m = date.getMonth() + 1;
-					m = m < 10 ? ('0' + m) : m;
-					var d = date.getDate();
-					d = d < 10 ? ('0' + d) : d;
-					return y + '-' + m + '-' + d;
-				}else {
-					return null;
-				}
-			}
-
-	},
+		},
 		mounted() {
 			this.getUsers();
 		}

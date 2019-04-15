@@ -68,7 +68,7 @@
 	export default {
 		data() {
 			return {
-				sysName:'哈哈哈有限公司',
+				sysName:'VUEADMIN',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '',
@@ -123,7 +123,7 @@
 			if (user) {
 				user = JSON.parse(user);
 				this.sysUserName = user.name || '';
-				this.sysUserAvatar = user.icon || '';
+				this.sysUserAvatar = user.avatar || '';
 			}
 
 		}
